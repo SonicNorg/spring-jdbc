@@ -6,15 +6,15 @@ package ru.sbt.lessons;
 public class User {
     private Long id;
     private String login;
-    private String passwordMD5;
+    private String passwordHash;
 
     public User() {
     }
 
-    public User(Long id, String login, String passwordMD5) {
+    public User(Long id, String login, String passwordHash) {
         this.id = id;
         this.login = login;
-        this.passwordMD5 = passwordMD5;
+        this.passwordHash = passwordHash;
     }
 
     public Long getId() {
@@ -33,12 +33,12 @@ public class User {
         this.login = login;
     }
 
-    public String getPasswordMD5() {
-        return passwordMD5;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPasswordMD5(String passwordMD5) {
-        this.passwordMD5 = passwordMD5;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
     @Override
@@ -46,7 +46,7 @@ public class User {
         return "User{" +
                 "id=" + id +
                 ", login='" + login + '\'' +
-                ", passwordMd5='" + passwordMD5 + '\'' +
+                ", passwordMd5='" + passwordHash + '\'' +
                 '}';
     }
 }

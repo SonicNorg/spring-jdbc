@@ -50,7 +50,7 @@ public class UserDaoImpl implements UserDao {
                     "insert into user (login, password_hash)" +
                             "values (?,?)")) {
                 preparedStatement.setString(1, user.getLogin());
-                preparedStatement.setString(2, user.getPasswordMD5());
+                preparedStatement.setString(2, user.getPasswordHash());
                 int result = 0;
                 try {
                     result = preparedStatement.executeUpdate();
@@ -69,7 +69,7 @@ public class UserDaoImpl implements UserDao {
             try (PreparedStatement preparedStatement = connection.prepareStatement(
                     "update user set login = ?, password_hash = ? where id = ?")) {
                 preparedStatement.setString(1, user.getLogin());
-                preparedStatement.setString(2, user.getPasswordMD5());
+                preparedStatement.setString(2, user.getPasswordHash());
                 preparedStatement.setLong(3, user.getId());
                 int result = 0;
                 try {

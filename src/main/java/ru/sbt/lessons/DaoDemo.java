@@ -9,11 +9,11 @@ import java.util.Optional;
  * Created by axelk on 22.10.2016.
  */
 public class DaoDemo {
-    private final UserDaoImpl userDao;
+    private final UserDaoImpl userDaoImpl;
 
     public DaoDemo(String url) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(url); // тут чутка исправил
-        userDao = new UserDaoImpl(jdbcTemplate);
+        userDaoImpl = new UserDaoImpl(jdbcTemplate);
     }
 
     public static void main(String[] args) {
@@ -25,7 +25,7 @@ public class DaoDemo {
         User updatedUser = new User();
         updatedUser.setId(1L);
         updatedUser.setLogin("root2");
-        updatedUser.setPasswordMD5("passwordWithBlackJack");
+        updatedUser.setPasswordHash("passwordWithBlackJack");
         daoDemo.updateUser(updatedUser);
         daoDemo.listUsers();
     }
@@ -34,7 +34,7 @@ public class DaoDemo {
         System.out.println("*********** Starting update user *********");
         boolean result=false;
         try {
-            result = userDao.update(updatedUser);
+            result = userDaoImpl.update(updatedUser);
         }catch (RuntimeException e) {
             e.printStackTrace();
         }
@@ -42,7 +42,7 @@ public class DaoDemo {
     }
 
     private void findByLogin(String login) {
-        Optional<User> user = userDao.findByLogin(login);
+        Optional<User> user = userDaoImpl.findByLogin(login);
         if (user.isPresent()){
             System.out.println(user.get());
         }else
@@ -56,10 +56,10 @@ public class DaoDemo {
         User user = new User();
         user.setLogin(login);
         String md5Hex = DigestUtils.md5Hex(password);
-        user.setPasswordMD5(md5Hex);
+        user.setPasswordHash(md5Hex);
         boolean result = false;
         try {
-            result = userDao.create(user);
+            result = userDaoImpl.create(user);
         }catch (RuntimeException e)
         {
             System.out.println("**** User with it login already created *******");
@@ -69,7 +69,7 @@ public class DaoDemo {
     }
     private void listUsers(){
         System.out.println("***** Printing users start *******");
-        List<User> users = userDao.list();
+        List<User> users = userDaoImpl.list();
         users.forEach(System.out::println);
         System.out.println("****** Printing finished *******");
     }
