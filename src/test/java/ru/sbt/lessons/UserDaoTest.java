@@ -25,7 +25,7 @@ public class UserDaoTest
      */
     public static Test suite()
     {
-        return new TestSuite( UserDao.class );
+        return new TestSuite( UserDaoImpl.class );
     }
 
     /**

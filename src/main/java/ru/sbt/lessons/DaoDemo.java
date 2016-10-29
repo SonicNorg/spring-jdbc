@@ -9,11 +9,11 @@ import java.util.Optional;
  * Created by axelk on 22.10.2016.
  */
 public class DaoDemo {
-    private final UserDao userDao;
+    private final UserDaoImpl userDao;
 
     public DaoDemo(String url) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(url); // тут чутка исправил
-        userDao = new UserDao(jdbcTemplate);
+        userDao = new UserDaoImpl(jdbcTemplate);
     }
 
     public static void main(String[] args) {
